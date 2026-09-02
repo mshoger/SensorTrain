@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sensortrain-web
+  namespace: sensortrain
+  labels:
+    app: sensortrain-web
+spec:
+  selector:
+    app: sensortrain-web
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+  type: ClusterIP
