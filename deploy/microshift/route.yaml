@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: sensortrain
+  namespace: sensortrain
+spec:
+  host: sensortrain.test
+  to:
+    kind: Service
+    name: sensortrain-web
+  port:
+    targetPort: http
