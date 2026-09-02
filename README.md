@@ -1,12 +1,8 @@
 # SensorTrain
 
-SensorTrain is a Raspberry Pi 5 / Raspberry Pi Pico 2 W sensor and compute
-platform designed to operate inside a LEGO train.
+SensorTrain is a Raspberry Pi 5 / Raspberry Pi Pico 2 W sensor and compute platform designed to operate inside a LEGO train.
 
-The Raspberry Pi 5 runs Red Hat Enterprise Linux 9.8 with Red Hat build of
-MicroShift 4.22 on a custom Raspberry Pi 6.18 kernel. A Pico 2 W handles
-physical sensor acquisition and fan control, with telemetry bridged into a
-MicroShift-hosted web dashboard.
+The Raspberry Pi 5 runs Red Hat Enterprise Linux 9.8 with the Red Hat build of MicroShift 4.22 on a custom Raspberry Pi 6.18 kernel. A Pico 2 W handles physical sensor acquisition and fan control, with telemetry bridged into a MicroShift-hosted web dashboard.
 
 ## Hardware
 
@@ -30,6 +26,7 @@ MicroShift-hosted web dashboard.
 
 ## Software architecture
 
+```text
 Pico 2 W
     |
     | USB serial / NDJSON
@@ -42,6 +39,7 @@ MicroShift / sensortrain-web
     |
     v
 Browser dashboard
+```
 
 The dashboard provides:
 
@@ -53,16 +51,24 @@ The dashboard provides:
 - 1, 5, 10, 20, and 30 minute history windows
 - independent PICO, BRIDGE, and CLUSTER health indicators
 
-History is intentionally stored in RAM and resets when the web application
-restarts.
+History is intentionally stored in RAM and resets when the web application restarts.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Hardware](docs/hardware.md)
+- [Installation](docs/installation.md)
+- [v1.0 acceptance testing](docs/acceptance-testing.md)
+- [MicroShift deployment](deploy/microshift/README.md)
+- [Raspberry Pi / RHEL / MicroShift platform notes](platform/raspberry-pi-rhel-microshift.md)
 
 ## Repository layout
 
 - `pico/` - Pico 2 W CircuitPython firmware
 - `bridge/` - Raspberry Pi host serial/HTTP bridge and host integration
 - `web/` - MicroShift dashboard application
-- `deploy/` - deployment manifests
-- `docs/` - architecture and operating documentation
+- `deploy/` - deployment manifests and deployment notes
+- `docs/` - architecture, hardware, installation, and acceptance documentation
 - `platform/` - Raspberry Pi / RHEL / MicroShift platform notes
 - `releases/` - release records
 
@@ -75,3 +81,9 @@ SensorTrain v1.0
 - RHEL: 9.8
 - MicroShift: 4.22
 - Kubernetes: 1.35
+
+The `v1.0.0` tag is the frozen accepted baseline. Development and documentation continue on `main`.
+
+## Support note
+
+The RHEL userspace and MicroShift packages used by this project are genuine Red Hat software. Raspberry Pi 5 is not a supported Red Hat hardware target for this configuration, and the project relies on a custom Raspberry Pi kernel and boot arrangement.
