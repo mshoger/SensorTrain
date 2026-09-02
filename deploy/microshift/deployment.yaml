@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensortrain-web
+  namespace: sensortrain
+  labels:
+    app: sensortrain-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensortrain-web
+  template:
+    metadata:
+      labels:
+        app: sensortrain-web
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: web
+          image: registry.access.redhat.com/ubi9/python-311:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - python3
+            - /app/server.py
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: app-source
+              mountPath: /app/server.py
+              subPath: server.py
+              readOnly: true
+      volumes:
+        - name: app-source
+          configMap:
+            name: sensortrain-app
