@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.swp
+*.bak
+
+# Machine-specific configuration
+.env
+*.env
+!*.env.example
+sensortrain-bridge.sysconfig
+
+# Cluster-generated snapshots
+*-live.yaml
+*-snapshot.yaml
+
+# CircuitPython filesystem noise
+.Trashes
+.fseventsd/

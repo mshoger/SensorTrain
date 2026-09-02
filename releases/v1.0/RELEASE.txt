@@ -1,0 +1,30 @@
+SensorTrain v1.0
+
+Platform:
+- RHEL 9.8
+- Red Hat build of MicroShift 4.22
+- Raspberry Pi 5
+- custom Raspberry Pi 6.18 kernel / 4K pages
+
+Pico firmware:
+- SensorTrain 0.3.0
+- CircuitPython 10.2.1
+
+Dashboard:
+- Instrument-panel UI
+- live gauges
+- motion/orientation/Hall instrumentation
+- discrete fan control
+- 8 simultaneous history graphs
+- global 1/5/10/20/30 minute windows
+- PICO / BRIDGE / CLUSTER health indicators
+- history intentionally RAM-only
+
+Acceptance:
+- telemetry: PASS
+- fan control: PASS
+- Hall sensing: PASS
+- dashboard pod replacement: PASS
+- bridge stop/recovery: PASS
+- Pico disconnect/reconnect: PASS
+- independent system-health indicators: PASS

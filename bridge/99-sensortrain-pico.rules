@@ -1,0 +1,7 @@
+SUBSYSTEM=="tty", \
+ATTRS{idVendor}=="239a", \
+ATTRS{idProduct}=="8162", \
+ATTRS{serial}=="726CD099DDC2BAE0", \
+SYMLINK+="sensortrain-pico", \
+GROUP="dialout", \
+MODE="0660"
